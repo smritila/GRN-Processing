@@ -1,11 +1,13 @@
+import React from "react";
 import "./App.css";
-import TopBar from "./Components/TopBar";
+
+import Layout from "./Components/Layout";
 
 function App() {
   return (
-    <div className="App">
-      <TopBar />
-    </div>
+    <>
+      <Layout>{/* your page content goes here */}</Layout>
+    </>
   );
 }
 
