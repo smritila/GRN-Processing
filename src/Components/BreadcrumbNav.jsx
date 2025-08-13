@@ -1,16 +1,15 @@
-import React from "react";
+import { Breadcrumb } from "react-bootstrap";
+
 const BreadcrumbNav = () => {
   return (
-    <nav aria-label="breadcrumb" className="mb-0">
-      <ol className="breadcrumb mb-0">
-        <li className="breadcrumb-item text-muted">
-          <span>Inventory</span>
-        </li>
-        <li className="breadcrumb-item active fw-medium" aria-current="page">
-          GRN Processing
-        </li>
-      </ol>
-    </nav>
+    <Breadcrumb className="mb-0">
+      <Breadcrumb.Item linkAs="span" className="text-muted">
+        Inventory
+      </Breadcrumb.Item>
+      <Breadcrumb.Item active className="fw-medium">
+        GRN Processing
+      </Breadcrumb.Item>
+    </Breadcrumb>
   );
 };
 
