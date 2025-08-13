@@ -2,11 +2,14 @@ import React from "react";
 import "./App.css";
 
 import Layout from "./Components/Layout";
+import GrnPage from "./GRN/GrnPage";
 
 function App() {
   return (
     <>
-      <Layout>{/* your page content goes here */}</Layout>
+      <Layout>
+        <GrnPage />
+      </Layout>
     </>
   );
 }
