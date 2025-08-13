@@ -1,48 +1,52 @@
 import React from "react";
 
 const SectionTabs = () => {
+  const baseStyle = {
+    borderRadius: 8,
+  };
+
   return (
-    <div className="btn-group" role="group" aria-label="Section tabs">
+    <div className="d-flex gap-2">
       <button
         type="button"
-        className="btn btn-success fw-semibold px-4"
+        className="btn btn-success fw-semibold px-4 text-white"
         style={{
-          borderRadius: 10,
-          borderColor: "#1e8e3e",
+          ...baseStyle,
           background: "#1e8e3e",
+          borderColor: "#1e8e3e",
         }}
       >
         GRN
       </button>
       <button
         type="button"
-        className="btn btn-outline-dark fw-semibold px-4 bg-white"
+        className="btn fw-semibold px-4 text-white"
         style={{
-          borderRadius: 10,
-          borderColor: "#d9dee7",
-          color: "#2c333a",
+          ...baseStyle,
+          background: "#000",
+          borderColor: "#000",
         }}
       >
         Putaway
       </button>
       <button
         type="button"
-        className="btn btn-outline-dark fw-semibold px-4 bg-white"
+        className="btn fw-semibold px-4 text-white"
         style={{
-          borderRadius: 10,
-          borderColor: "#d9dee7",
-          color: "#2c333a",
+          ...baseStyle,
+          background: "#000",
+          borderColor: "#000",
         }}
       >
         Picking
       </button>
       <button
         type="button"
-        className="btn btn-outline-dark fw-semibold px-4 bg-white"
+        className="btn fw-semibold px-4 text-white"
         style={{
-          borderRadius: 10,
-          borderColor: "#d9dee7",
-          color: "#2c333a",
+          ...baseStyle,
+          background: "#000",
+          borderColor: "#000",
         }}
       >
         Packing &amp; Shipping

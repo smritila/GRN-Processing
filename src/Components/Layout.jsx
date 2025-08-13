@@ -12,8 +12,10 @@ const Layout = ({ children }) => {
           className="container-fluid"
           style={{ maxWidth: 1440, padding: "16px 60px" }}
         >
-          <BreadcrumbNav />
-          <SectionTabs />
+          <div className="d-flex align-items-center gap-3 flex-wrap">
+            <BreadcrumbNav />
+            <SectionTabs />
+          </div>
         </div>
       </div>
       <main>

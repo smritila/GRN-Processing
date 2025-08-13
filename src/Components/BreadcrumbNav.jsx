@@ -1,7 +1,7 @@
 import React from "react";
 const BreadcrumbNav = () => {
   return (
-    <nav aria-label="breadcrumb" className="mb-3">
+    <nav aria-label="breadcrumb" className="mb-0">
       <ol className="breadcrumb mb-0">
         <li className="breadcrumb-item text-muted">
           <span>Inventory</span>
