@@ -1,7 +1,7 @@
 import { Card } from "react-bootstrap";
 import GrnHeader from "./GrnHeader";
 import GrnMetaForm from "./GrnMetaForm";
-import ItemsTableRDG from "./ItemsTableRDG";
+import GrnRecords from "./GrnRecords";
 
 const GrnPage = () => {
   return (
@@ -9,7 +9,7 @@ const GrnPage = () => {
       <Card.Body className="p-4">
         <GrnHeader />
         <GrnMetaForm />
-        <ItemsTableRDG />
+        <GrnRecords />
       </Card.Body>
     </Card>
   );

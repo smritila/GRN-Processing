@@ -25,8 +25,8 @@ const SectionTabs = () => {
             eventKey={item.key}
             className="fw-semibold px-4 rounded-2"
             style={{
-              background: activeKey === item.key ? "#1e8e3e" : "transparent",
-              borderColor: activeKey === item.key ? "#1e8e3e" : "transparent",
+              background: activeKey === item.key ? "#2D7F27" : "transparent",
+              borderColor: activeKey === item.key ? "#2D7F27" : "transparent",
               color: activeKey === item.key ? "#fff" : "#969DAC",
             }}
           >

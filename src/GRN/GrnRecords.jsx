@@ -1,8 +1,9 @@
 import { useMemo, useState, useCallback } from "react";
 import { DataGrid } from "react-data-grid";
-import { Button, Badge } from "react-bootstrap";
+import { ButtonGroup, Button, Badge } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
-import EntryModeTabs from "./EntryModeTabs";
+
+import ScanMode from "./ScanMode";
 
 /* ---------- Cell Editors / Formatters ---------- */
 function NumberEditor({ row, column, onRowChange }) {
@@ -84,9 +85,12 @@ function ConditionEditor({ row, onRowChange }) {
 }
 
 /* ---------- Main Component ---------- */
-function ItemsTableRDG() {
+function GrnRecords() {
   const [mode, setMode] = useState("manual"); // 'scan' | 'manual'
-  const isScan = mode === "scan";
+  const buttonGroups = [
+    { key: "manual", label: "MANUAL ENTRY" },
+    { key: "scan", label: "SCAN" },
+  ];
 
   const [rows, setRows] = useState([
     {
@@ -231,16 +235,33 @@ function ItemsTableRDG() {
           className="d-flex align-items-center justify-content-between px-3 py-2 border-bottom"
           style={{ background: "#f7f8f6" }}
         >
-          <EntryModeTabs mode={mode} onChange={setMode} />
+          <ButtonGroup className="gap-2">
+            {buttonGroups.map(({ key, label }) => (
+              <Button
+                key={key}
+                role="tab"
+                aria-selected={mode === key}
+                aria-controls={`panel-${key}`}
+                onClick={() => setMode(key)}
+                className="fw-semibold px-3 border rounded"
+                variant={mode === key ? "secondary" : "outline-light"}
+                style={{
+                  backgroundColor: mode === key ? "#6C7059" : "transparent",
+                  color: mode === key ? "#fff" : "#6C7059",
+                  borderColor: mode === key ? "#6C7059" : "#F5F6F1",
+                }}
+              >
+                {label}
+              </Button>
+            ))}
+          </ButtonGroup>
           <Badge bg="light" text="dark" className="border"></Badge>
         </div>
 
         {/* Content */}
         <div className="p-3">
-          {isScan ? (
-            <div className="text-muted">
-              Scan UI coming soon — connect your barcode scanner/camera here.
-            </div>
+          {mode === "scan" ? (
+            <ScanMode />
           ) : (
             <>
               {/* Grid + inline footer button inside the same bordered box */}
@@ -277,4 +298,4 @@ function ItemsTableRDG() {
     </div>
   );
 }
-export default ItemsTableRDG;
+export default GrnRecords;
