@@ -1,5 +1,5 @@
 import React from "react";
-
+import "react-data-grid/lib/styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
