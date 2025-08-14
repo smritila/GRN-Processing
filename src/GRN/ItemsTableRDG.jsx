@@ -232,10 +232,7 @@ export default function ItemsTableRDG() {
           style={{ background: "#f7f8f6" }}
         >
           <EntryModeTabs mode={mode} onChange={setMode} />
-          <Badge bg="light" text="dark" className="border">
-            <span className="me-1">Items</span>
-            <strong>{rows.length}</strong>
-          </Badge>
+          <Badge bg="light" text="dark" className="border"></Badge>
         </div>
 
         {/* Content */}
