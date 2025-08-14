@@ -22,3 +22,11 @@
 .App-link {
   color: #61dafb;
 }
+
+.grn-my-breadcrumb > ol.breadcrumb {
+  margin-bottom: 0;
+}
+
+.ms-10 {
+  margin-left: 10rem;
+}

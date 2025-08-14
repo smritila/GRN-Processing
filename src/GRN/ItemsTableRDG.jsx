@@ -84,7 +84,7 @@ function ConditionEditor({ row, onRowChange }) {
 }
 
 /* ---------- Main Component ---------- */
-export default function ItemsTableRDG() {
+function ItemsTableRDG() {
   const [mode, setMode] = useState("manual"); // 'scan' | 'manual'
   const isScan = mode === "scan";
 
@@ -226,7 +226,7 @@ export default function ItemsTableRDG() {
   return (
     <div style={{ background: "#f3f6ed", borderRadius: 8 }} className="p-3">
       <div className="border rounded overflow-hidden">
-        {/* Toolbar */}
+        {/* Toolbar before the grid */}
         <div
           className="d-flex align-items-center justify-content-between px-3 py-2 border-bottom"
           style={{ background: "#f7f8f6" }}
@@ -243,31 +243,32 @@ export default function ItemsTableRDG() {
             </div>
           ) : (
             <>
-              {/* Give the grid a real height via wrapper */}
-              <div
-                className="border rounded overflow-hidden"
-                style={{ height: 360 }}
-              >
-                <DataGrid
-                  className="rdg-light"
-                  columns={columns}
-                  rows={rows}
-                  rowKeyGetter={(r) => r.id}
-                  onRowsChange={setRows}
-                  defaultColumnOptions={{ resizable: true }}
-                  style={{ height: "100%" }}
-                />
-              </div>
+              {/* Grid + inline footer button inside the same bordered box */}
+              <div className="border rounded overflow-hidden">
+                {/* Give the grid a real height via wrapper so it renders */}
+                <div style={{ height: 360 }}>
+                  <DataGrid
+                    className="rdg-light"
+                    columns={columns}
+                    rows={rows}
+                    rowKeyGetter={(r) => r.id}
+                    onRowsChange={setRows}
+                    defaultColumnOptions={{ resizable: true }}
+                    style={{ height: "100%" }}
+                  />
+                </div>
 
-              <div className="d-flex align-items-center gap-2 mt-3">
-                <Button
-                  variant="light"
-                  className="border d-flex align-items-center gap-2"
-                  onClick={addRow}
-                >
-                  <span className="fw-bold">+</span>
-                  <span className="fw-semibold">Add Item</span>
-                </Button>
+                {/* Footer bar directly under the last row */}
+                <div className="border-top p-2 d-flex align-items-center">
+                  <Button
+                    variant="light"
+                    className="border d-flex align-items-center gap-2"
+                    onClick={addRow}
+                  >
+                    <span className="fw-bold">+</span>
+                    <span className="fw-semibold">Add Item</span>
+                  </Button>
+                </div>
               </div>
             </>
           )}
@@ -276,3 +277,4 @@ export default function ItemsTableRDG() {
     </div>
   );
 }
+export default ItemsTableRDG;

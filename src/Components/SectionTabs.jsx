@@ -1,41 +1,40 @@
-import { Button, ButtonGroup } from "react-bootstrap";
+import { useState } from "react";
+import { Nav } from "react-bootstrap";
 
 const SectionTabs = () => {
-  const baseStyle = {
-    borderRadius: 8,
-  };
+  const menuItems = [
+    { key: "grn", label: "GRN" },
+    { key: "putaway", label: "Putaway" },
+    { key: "picking", label: "Picking" },
+    { key: "packing", label: "Packing & Shipping" },
+  ];
+
+  const [activeKey, setActiveKey] = useState("grn");
 
   return (
-    <ButtonGroup className="gap-2">
-      <Button
-        variant="success"
-        className="fw-semibold px-4 text-white"
-        style={{ ...baseStyle, background: "#1e8e3e", borderColor: "#1e8e3e" }}
-      >
-        GRN
-      </Button>
-      <Button
-        variant="dark"
-        className="fw-semibold px-4 text-white"
-        style={{ ...baseStyle, background: "#000", borderColor: "#000" }}
-      >
-        Putaway
-      </Button>
-      <Button
-        variant="dark"
-        className="fw-semibold px-4 text-white"
-        style={{ ...baseStyle, background: "#000", borderColor: "#000" }}
-      >
-        Picking
-      </Button>
-      <Button
-        variant="dark"
-        className="fw-semibold px-4 text-white"
-        style={{ ...baseStyle, background: "#000", borderColor: "#000" }}
-      >
-        Packing &amp; Shipping
-      </Button>
-    </ButtonGroup>
+    <Nav
+      variant="pills"
+      activeKey={activeKey}
+      onSelect={setActiveKey}
+      className="gap-2 p-2 rounded"
+      style={{ backgroundColor: "#1B1C1E" }}
+    >
+      {menuItems.map((item) => (
+        <Nav.Item key={item.key}>
+          <Nav.Link
+            eventKey={item.key}
+            className="fw-semibold px-4 rounded-2"
+            style={{
+              background: activeKey === item.key ? "#1e8e3e" : "transparent",
+              borderColor: activeKey === item.key ? "#1e8e3e" : "transparent",
+              color: activeKey === item.key ? "#fff" : "#969DAC",
+            }}
+          >
+            {item.label}
+          </Nav.Link>
+        </Nav.Item>
+      ))}
+    </Nav>
   );
 };
 

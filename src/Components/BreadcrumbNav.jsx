@@ -2,7 +2,7 @@ import { Breadcrumb } from "react-bootstrap";
 
 const BreadcrumbNav = () => {
   return (
-    <Breadcrumb className="mb-0">
+    <Breadcrumb className="grn-my-breadcrumb">
       <Breadcrumb.Item linkAs="span" className="text-muted">
         Inventory
       </Breadcrumb.Item>

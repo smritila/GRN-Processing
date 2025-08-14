@@ -9,6 +9,11 @@ const TopBar = () => {
     { icon: "bi-download", label: "Downloads" },
     { icon: "bi-inboxes-fill", label: "Inventory", isActive: true },
     { icon: "bi-card-checklist", label: "Tasks" },
+  ];
+
+  const quickActions = [
+    { icon: "bi-search", label: "Search" },
+    { icon: "bi-book", label: "Help" },
     { icon: "bi-bell", label: "Notifications" },
   ];
 
@@ -68,45 +73,24 @@ const TopBar = () => {
         </div>
 
         {/* Right: search, help, notifications, user */}
-        <div className="d-flex align-items-center ms-auto gap-2">
-          <Button
-            variant="outline-light"
-            size="sm"
-            className="d-flex align-items-center gap-2"
-            style={{
-              background: "transparent",
-              borderColor: "#2a313d",
-              color: "#e6eef8",
-            }}
-          >
-            <i className="bi bi-search" />
-          </Button>
-
-          <Button
-            variant="outline-light"
-            size="sm"
-            style={{
-              background: "transparent",
-              borderColor: "#2a313d",
-              color: "#e6eef8",
-            }}
-            aria-label="Help"
-          >
-            <i class="bi bi-book"></i>
-          </Button>
-
-          <Button
-            variant="outline-light"
-            size="sm"
-            style={{
-              background: "transparent",
-              borderColor: "#2a313d",
-              color: "#e6eef8",
-            }}
-            aria-label="Notifications"
-          >
-            <i className="bi bi-bell" />
-          </Button>
+        <div
+          className="d-flex align-items-center ms-auto gap-2 p-2 rounded-5"
+          style={{ backgroundColor: "#292B2D" }}
+        >
+          {quickActions.map((action, index) => (
+            <Button
+              key={index}
+              size="sm"
+              style={{
+                background: "transparent",
+                border: "none",
+                color: "#e6eef8",
+              }}
+              aria-label={action.label}
+            >
+              <i className={`bi ${action.icon}`} />
+            </Button>
+          ))}
 
           <Dropdown align="end">
             <Dropdown.Toggle

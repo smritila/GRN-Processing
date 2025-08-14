@@ -10,18 +10,18 @@ const Layout = ({ children }) => {
       <TopBar />
 
       {/* Sub-header: breadcrumb + tabs in one row */}
-      <div className="border-bottom" style={{ background: "#f7f8f6" }}>
-        <Container fluid style={{ maxWidth: 1440, padding: "16px 60px" }}>
-          <Stack
-            direction="horizontal"
-            gap={3}
-            className="flex-wrap align-items-center"
-          >
-            <BreadcrumbNav />
+      <Container
+        className="border-bottom"
+        fluid
+        style={{ maxWidth: 1440, padding: "16px 60px" }}
+      >
+        <Stack direction="horizontal">
+          <BreadcrumbNav />
+          <div className="ms-10">
             <SectionTabs />
-          </Stack>
-        </Container>
-      </div>
+          </div>
+        </Stack>
+      </Container>
 
       {/* Page content */}
       <main>
