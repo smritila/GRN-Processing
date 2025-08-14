@@ -1,13 +1,23 @@
-import React from "react";
-
 import { Navbar, Container, Button, Dropdown, Image } from "react-bootstrap";
 
+import { ReactComponent as Logo } from "../assets/logo.svg";
+import NavItemWrapper from "./TopBarNavItemWrapper";
+
 const TopBar = () => {
+  const navItems = [
+    { icon: "bi-grid-3x3-gap-fill", label: "Dashboard" },
+    { icon: "bi-download", label: "Downloads" },
+    { icon: "bi-inboxes-fill", label: "Inventory", isActive: true },
+    { icon: "bi-card-checklist", label: "Tasks" },
+    { icon: "bi-bell", label: "Notifications" },
+  ];
+
   return (
     <Navbar
       expand="lg"
       style={{
         background: "#111418",
+        color: "#c9d1d9",
         height: 72,
       }}
       className="shadow-sm"
@@ -25,66 +35,36 @@ const TopBar = () => {
           className="d-flex align-items-center gap-2 text-white"
           style={{ fontWeight: 600 }}
         >
-          <span
-            className="d-inline-flex align-items-center justify-content-center rounded-circle"
-            style={{
-              width: 36,
-              height: 36,
-              background: "#1f242d",
-              border: "1px solid #2a313d",
-            }}
-          >
-            {/* Placeholder logo mark */}
-            <i className="bi bi-recycle" />
-          </span>
+          <NavItemWrapper isActive isSquare>
+            <Logo
+              style={{
+                width: 30,
+                height: 30,
+              }}
+            />
+          </NavItemWrapper>
         </Navbar.Brand>
 
         {/* Center: icon group (like the screenshot toolbar) */}
-        <div
-          className="d-none d-md-flex align-items-center gap-3"
-          style={{ color: "#c9d1d9" }}
-        >
-          <Button
-            variant="link"
-            className="p-0 text-light opacity-75 hover-opacity-100"
-          >
-            <i className="bi bi-grid-3x3-gap-fill fs-5" />
-          </Button>
-          <Button
-            variant="link"
-            className="p-0 text-light opacity-75 hover-opacity-100"
-          >
-            <i className="bi bi-download fs-5" />
-          </Button>
-          <Button
-            variant="link"
-            className="p-0 text-light opacity-75 hover-opacity-100"
-          >
-            <i className="bi bi-upload fs-5" />
-          </Button>
-          <Button
-            variant="link"
-            className="p-0 text-light opacity-75 hover-opacity-100"
-          >
-            <i className="bi bi-card-checklist fs-5" />
-          </Button>
-          <Button
-            variant="link"
-            className="p-0 text-light opacity-75 hover-opacity-100"
-          >
-            <i className="bi bi-bell fs-5" />
-          </Button>
-          {/* little green live-indicator like the dot in the screenshot */}
-          <span
-            className="ms-1 rounded-circle"
-            style={{
-              width: 6,
-              height: 6,
-              background: "#2ecc71",
-              display: "inline-block",
-            }}
-            aria-label="status: online"
-          />
+        <div className="d-md-flex align-items-center gap-3">
+          {navItems.map((item, index) => (
+            <NavItemWrapper
+              key={index}
+              aria-label={item.label}
+              showIndicator={item.label === "Tasks"}
+              isActive={item.isActive}
+            >
+              {item.isActive ? (
+                <span className="fw-semibold" style={{ color: "#98FF4F" }}>
+                  <i className={`bi ${item.icon} fs-5`} />
+                  &nbsp;&nbsp;
+                  {item.label}
+                </span>
+              ) : (
+                <i className={`bi ${item.icon} fs-5`} />
+              )}
+            </NavItemWrapper>
+          ))}
         </div>
 
         {/* Right: search, help, notifications, user */}
@@ -112,7 +92,7 @@ const TopBar = () => {
             }}
             aria-label="Help"
           >
-            <i className="bi bi-question-circle" />
+            <i class="bi bi-book"></i>
           </Button>
 
           <Button
