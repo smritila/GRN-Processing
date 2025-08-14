@@ -2,6 +2,7 @@ import { Card } from "react-bootstrap";
 import GrnHeader from "./GrnHeader";
 import GrnMetaForm from "./GrnMetaForm";
 import GrnRecords from "./GrnRecords";
+import FooterActions from "./FooterActions";
 
 const GrnPage = () => {
   return (
@@ -10,6 +11,7 @@ const GrnPage = () => {
         <GrnHeader />
         <GrnMetaForm />
         <GrnRecords />
+        <FooterActions />
       </Card.Body>
     </Card>
   );
