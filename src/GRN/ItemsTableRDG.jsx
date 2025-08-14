@@ -1,7 +1,7 @@
 import { useMemo, useState, useCallback } from "react";
 import { DataGrid } from "react-data-grid";
 import { Button, Badge } from "react-bootstrap";
-// import { Trash } from "react-bootstrap-icons"; // optional if you want the icon
+import { Trash } from "react-bootstrap-icons";
 import EntryModeTabs from "./EntryModeTabs";
 
 /* ---------- Cell Editors / Formatters ---------- */
@@ -214,7 +214,7 @@ export default function ItemsTableRDG() {
               size="sm"
               onClick={() => deleteRow(row.id)}
             >
-              <span className="visually-hidden">Delete</span>✖
+              <Trash size={16} />
             </Button>
           </div>
         ),

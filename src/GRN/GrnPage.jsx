@@ -2,7 +2,6 @@ import { Card } from "react-bootstrap";
 import GrnHeader from "./GrnHeader";
 import GrnMetaForm from "./GrnMetaForm";
 import ItemsTableRDG from "./ItemsTableRDG";
-//import EntryModeTabs from "./EntryModeTabs";
 
 const GrnPage = () => {
   return (
