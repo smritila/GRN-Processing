@@ -3,12 +3,14 @@ import DotIndicator from "./DotIndicator";
 
 const ButtonWithIndicator = ({ children, ...bootstrapButtonProps }) => {
   return (
-    <span className="position-relative">
-      <Button {...bootstrapButtonProps}>{children}</Button>
-      <span className="position-absolute top-0 start-100 translate-middle">
-        <DotIndicator />
+    <Button {...bootstrapButtonProps}>
+      <span className="position-relative">
+        {children}
+        <span className="position-absolute top-0 start-100 translate-middle">
+          <DotIndicator />
+        </span>
       </span>
-    </span>
+    </Button>
   );
 };
 
