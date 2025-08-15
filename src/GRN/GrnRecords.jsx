@@ -137,9 +137,9 @@ function GrnRecords() {
     },
   ]);
 
-  const deleteRow = useCallback((id) => {
+  const deleteRow = (id) => {
     setRows((rs) => rs.filter((r) => r.id !== id));
-  }, []);
+  };
 
   const addRow = () => {
     setRows((rs) => [
@@ -157,73 +157,70 @@ function GrnRecords() {
     ]);
   };
 
-  const columns = useMemo(
-    () => [
-      {
-        key: "item",
-        name: "Item",
-        width: 220,
-        editable: true,
-        renderEditCell: (p) => <TextEditor {...p} />,
-      },
-      {
-        key: "expectedQty",
-        name: "Expected Qty",
-        editable: true,
-        renderEditCell: (p) => <NumberEditor {...p} />,
-      },
-      {
-        key: "rejectedQty",
-        name: "Rejected Qty",
-        editable: true,
-        renderEditCell: (p) => <NumberEditor {...p} />,
-      },
-      {
-        key: "batch",
-        name: "Batch / LOT",
-        editable: true,
-        renderEditCell: (p) => <TextEditor {...p} />,
-      },
-      {
-        key: "unitPrice",
-        name: "Actual Unit Price",
-        editable: true,
-        renderEditCell: (p) => <CurrencyEditor {...p} />,
-      },
-      {
-        key: "expiry",
-        name: "Expiry",
-        width: 150,
-        editable: true,
-        renderEditCell: (p) => <DateEditor {...p} />,
-      },
-      {
-        key: "condition",
-        name: "Condition",
-        width: 140,
-        editable: true,
-        renderCell: (p) => <ConditionFormatter row={p.row} />,
-        renderEditCell: (p) => <ConditionEditor {...p} />,
-      },
-      {
-        key: "actions",
-        name: "Actions",
-        width: 90,
-        renderCell: ({ row }) => (
-          <div className="d-flex justify-content-center">
-            <Button
-              variant="outline-danger"
-              size="sm"
-              onClick={() => deleteRow(row.id)}
-            >
-              <Trash size={16} />
-            </Button>
-          </div>
-        ),
-      },
-    ],
-    [deleteRow]
-  );
+  const columns = [
+    {
+      key: "item",
+      name: "Item",
+      width: 220,
+      editable: true,
+      renderEditCell: (p) => <TextEditor {...p} />,
+    },
+    {
+      key: "expectedQty",
+      name: "Expected Qty",
+      editable: true,
+      renderEditCell: (p) => <NumberEditor {...p} />,
+    },
+    {
+      key: "rejectedQty",
+      name: "Rejected Qty",
+      editable: true,
+      renderEditCell: (p) => <NumberEditor {...p} />,
+    },
+    {
+      key: "batch",
+      name: "Batch / LOT",
+      editable: true,
+      renderEditCell: (p) => <TextEditor {...p} />,
+    },
+    {
+      key: "unitPrice",
+      name: "Actual Unit Price",
+      editable: true,
+      renderEditCell: (p) => <CurrencyEditor {...p} />,
+    },
+    {
+      key: "expiry",
+      name: "Expiry",
+      width: 150,
+      editable: true,
+      renderEditCell: (p) => <DateEditor {...p} />,
+    },
+    {
+      key: "condition",
+      name: "Condition",
+      width: 140,
+      editable: true,
+      renderCell: (p) => <ConditionFormatter row={p.row} />,
+      renderEditCell: (p) => <ConditionEditor {...p} />,
+    },
+    {
+      key: "actions",
+      name: "Actions",
+      width: 90,
+      renderCell: ({ row }) => (
+        <div className="d-flex justify-content-center">
+          <Button
+            variant="outline-danger"
+            size="sm"
+            onClick={() => deleteRow(row.id)}
+          >
+            <Trash size={16} />
+          </Button>
+        </div>
+      ),
+    },
+  ];
 
   return (
     <div
