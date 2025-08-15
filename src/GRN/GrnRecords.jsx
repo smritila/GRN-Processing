@@ -157,8 +157,24 @@ function GrnRecords() {
           fixedHeader
           fixedHeaderScrollHeight="360px"
           customStyles={{
-            rows: { style: { minHeight: "100px" } },
-            headCells: { style: { fontWeight: 600 } },
+            rows: {
+              style: {
+                minHeight: "72px", // Row height
+                padding: "6px 0", // Vertical padding
+              },
+            },
+            headCells: {
+              style: {
+                fontWeight: 600,
+                minHeight: "72px", // Header height
+                padding: "6px 0", // Vertical padding
+              },
+            },
+            cells: {
+              style: {
+                padding: "6px", // Cell padding
+              },
+            },
           }}
         />
 
