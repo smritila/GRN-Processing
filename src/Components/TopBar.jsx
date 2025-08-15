@@ -53,7 +53,6 @@ const TopBar = () => {
           </NavItemWrapper>
         </Navbar.Brand>
 
-        {/* Center: icon group (like the screenshot toolbar) */}
         <div className="d-md-flex align-items-center gap-3">
           {navItems.map((item, index) => (
             <NavItemWrapper
