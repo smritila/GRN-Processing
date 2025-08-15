@@ -9,6 +9,8 @@ const TopBar = () => {
     { icon: "bi-download", label: "Downloads" },
     { icon: "bi-inboxes-fill", label: "Inventory", isActive: true },
     { icon: "bi-card-checklist", label: "Tasks" },
+    { icon: "bi bi-truck", label: "Shipments" },
+    { icon: "bi bi-journal-text", label: "Reports" },
   ];
 
   const quickActions = [
