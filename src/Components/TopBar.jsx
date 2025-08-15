@@ -2,6 +2,7 @@ import { Navbar, Container, Button, Dropdown, Image } from "react-bootstrap";
 
 import { ReactComponent as Logo } from "../assets/logo.svg";
 import NavItemWrapper from "./TopBarNavItemWrapper";
+import ButtonWithIndicator from "./ButtonWithIndicator";
 
 const TopBar = () => {
   const navItems = [
@@ -16,7 +17,7 @@ const TopBar = () => {
   const quickActions = [
     { icon: "bi-search", label: "Search" },
     { icon: "bi-book", label: "Help" },
-    { icon: "bi-bell", label: "Notifications" },
+    { icon: "bi-bell", label: "Notifications", showIndicator: true },
   ];
 
   return (
@@ -79,20 +80,26 @@ const TopBar = () => {
           className="d-flex align-items-center ms-auto gap-2 p-2 rounded-5"
           style={{ backgroundColor: "#292B2D" }}
         >
-          {quickActions.map((action, index) => (
-            <Button
-              key={index}
-              size="sm"
-              style={{
-                background: "transparent",
-                border: "none",
-                color: "#e6eef8",
-              }}
-              aria-label={action.label}
-            >
-              <i className={`bi ${action.icon}`} />
-            </Button>
-          ))}
+          {quickActions.map((action, index) => {
+            const ButtonComponent = action.showIndicator
+              ? ButtonWithIndicator
+              : Button;
+
+            return (
+              <ButtonComponent
+                key={index}
+                size="sm"
+                style={{
+                  background: "transparent",
+                  border: "none",
+                  color: "#e6eef8",
+                }}
+                aria-label={action.label}
+              >
+                <i className={`bi ${action.icon}`} />
+              </ButtonComponent>
+            );
+          })}
 
           <Dropdown align="end">
             <Dropdown.Toggle
