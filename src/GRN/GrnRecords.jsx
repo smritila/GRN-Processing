@@ -67,7 +67,9 @@ function CurrencyEditor({ row, column, onRowChange }) {
 function ConditionFormatter({ row }) {
   const isGood = row.condition === "GOOD";
   return (
-    <Badge bg={isGood ? "success" : "danger"}>{row.condition || "GOOD"}</Badge>
+    <Button className="w-100" variant={isGood ? "success" : "danger"} size="sm">
+      {row.condition}
+    </Button>
   );
 }
 function ConditionEditor({ row, onRowChange }) {
@@ -167,28 +169,24 @@ function GrnRecords() {
       {
         key: "expectedQty",
         name: "Expected Qty",
-        width: 130,
         editable: true,
         renderEditCell: (p) => <NumberEditor {...p} />,
       },
       {
         key: "rejectedQty",
         name: "Rejected Qty",
-        width: 130,
         editable: true,
         renderEditCell: (p) => <NumberEditor {...p} />,
       },
       {
         key: "batch",
         name: "Batch / LOT",
-        width: 150,
         editable: true,
         renderEditCell: (p) => <TextEditor {...p} />,
       },
       {
         key: "unitPrice",
         name: "Actual Unit Price",
-        width: 170,
         editable: true,
         renderEditCell: (p) => <CurrencyEditor {...p} />,
       },
@@ -228,73 +226,67 @@ function GrnRecords() {
   );
 
   return (
-    <div style={{ background: "#f3f6ed", borderRadius: 8 }} className="p-3">
-      <div className="border rounded overflow-hidden">
-        {/* Toolbar before the grid */}
-        <div
-          className="d-flex align-items-center justify-content-between px-3 py-2 border-bottom"
-          style={{ background: "#f7f8f6" }}
-        >
-          <ButtonGroup className="gap-2">
-            {buttonGroups.map(({ key, label }) => (
-              <Button
-                key={key}
-                role="tab"
-                aria-selected={mode === key}
-                aria-controls={`panel-${key}`}
-                onClick={() => setMode(key)}
-                className="fw-semibold px-3 border rounded"
-                variant={mode === key ? "secondary" : "outline-light"}
-                style={{
-                  backgroundColor: mode === key ? "#6C7059" : "transparent",
-                  color: mode === key ? "#fff" : "#6C7059",
-                  borderColor: mode === key ? "#6C7059" : "#F5F6F1",
-                }}
-              >
-                {label}
-              </Button>
-            ))}
-          </ButtonGroup>
-          <Badge bg="light" text="dark" className="border"></Badge>
-        </div>
-
-        {/* Content */}
-        <div className="p-3">
-          {mode === "scan" ? (
-            <ScanMode />
-          ) : (
-            <>
-              {/* Grid + inline footer button inside the same bordered box */}
-              <div className="border rounded overflow-hidden">
-                {/* Give the grid a real height via wrapper so it renders */}
-                <div style={{ height: 360 }}>
-                  <DataGrid
-                    className="rdg-light"
-                    columns={columns}
-                    rows={rows}
-                    rowKeyGetter={(r) => r.id}
-                    onRowsChange={setRows}
-                    defaultColumnOptions={{ resizable: true }}
-                    style={{ height: "100%" }}
-                  />
-                </div>
-
-                {/* Footer bar directly under the last row */}
-                <div className="border-top p-2 d-flex align-items-center">
-                  <Button
-                    variant="light"
-                    className="border d-flex align-items-center gap-2"
-                    onClick={addRow}
-                  >
-                    <span className="fw-bold">+</span>
-                    <span className="fw-semibold">Add Item</span>
-                  </Button>
-                </div>
-              </div>
-            </>
-          )}
-        </div>
+    <div
+      style={{ background: "#f3f6ed", borderRadius: 8 }}
+      className="py-4 px-3"
+    >
+      {/* Toolbar before the grid */}
+      <div className="d-flex align-items-center justify-content-between mb-3">
+        <ButtonGroup className="gap-2">
+          {buttonGroups.map(({ key, label }) => (
+            <Button
+              key={key}
+              role="tab"
+              aria-selected={mode === key}
+              aria-controls={`panel-${key}`}
+              onClick={() => setMode(key)}
+              className="fw-semibold px-3 border rounded"
+              variant={mode === key ? "secondary" : "outline-light"}
+              style={{
+                backgroundColor: mode === key ? "#6C7059" : "transparent",
+                color: mode === key ? "#fff" : "#6C7059",
+                borderColor: mode === key ? "#6C7059" : "#F5F6F1",
+              }}
+            >
+              {label}
+            </Button>
+          ))}
+        </ButtonGroup>
+        <Badge bg="light" text="dark" className="border"></Badge>
       </div>
+
+      {/* Content */}
+
+      {mode === "scan" ? (
+        <ScanMode />
+      ) : (
+        <div className="bg-white p-3">
+          {/* Give the grid a real height via wrapper so it renders */}
+
+          <DataGrid
+            className="rdg-light"
+            columns={columns}
+            rows={rows}
+            rowKeyGetter={(r) => r.id}
+            rowHeight={40}
+            onRowsChange={setRows}
+            defaultColumnOptions={{ resizable: true }}
+            style={{ height: "100%" }}
+          />
+
+          {/* Footer bar directly under the last row */}
+          <div className="mt-2 d-flex align-items-center">
+            <Button
+              variant="light"
+              className="border d-flex align-items-center gap-2"
+              onClick={addRow}
+            >
+              <span className="fw-bold">+</span>
+              <span className="fw-semibold">Add Item</span>
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
