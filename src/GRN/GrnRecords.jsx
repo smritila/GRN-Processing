@@ -4,14 +4,12 @@ import DataTable from "react-data-table-component";
 import { ButtonGroup, Button, Badge } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 
-import ScanMode from "./ScanMode";
-
 /* ---------- Main Component ---------- */
 function GrnRecords() {
-  const [mode, setMode] = useState("manual"); // 'scan' | 'manual'
+  const mode = "scan"; // 'scan' | 'manual'
   const buttonGroups = [
-    { key: "manual", label: "MANUAL ENTRY" },
     { key: "scan", label: "SCAN" },
+    { key: "manual", label: "MANUAL ENTRY" },
   ];
 
   const [rows, setRows] = useState([
@@ -162,7 +160,6 @@ function GrnRecords() {
               role="tab"
               aria-selected={mode === key}
               aria-controls={`panel-${key}`}
-              onClick={() => setMode(key)}
               className="fw-semibold px-3 border rounded"
               variant={mode === key ? "secondary" : "outline-light"}
               style={{
@@ -179,36 +176,33 @@ function GrnRecords() {
       </div>
 
       {/* Content */}
-      {mode === "scan" ? (
-        <ScanMode />
-      ) : (
-        <div className="bg-white p-3">
-          <DataTable
-            columns={columns}
-            data={rows}
-            dense
-            highlightOnHover
-            fixedHeader
-            fixedHeaderScrollHeight="360px"
-            customStyles={{
-              rows: { style: { minHeight: "40px" } },
-              headCells: { style: { fontWeight: 600 } },
-            }}
-          />
 
-          {/* Footer bar directly under the last row */}
-          <div className="mt-2 d-flex align-items-center">
-            <Button
-              variant="light"
-              className="border d-flex align-items-center gap-2"
-              onClick={addRow}
-            >
-              <span className="fw-bold">+</span>
-              <span className="fw-semibold">Add Item</span>
-            </Button>
-          </div>
+      <div className="bg-white p-3">
+        <DataTable
+          columns={columns}
+          data={rows}
+          dense
+          highlightOnHover
+          fixedHeader
+          fixedHeaderScrollHeight="360px"
+          customStyles={{
+            rows: { style: { minHeight: "40px" } },
+            headCells: { style: { fontWeight: 600 } },
+          }}
+        />
+
+        {/* Footer bar directly under the last row */}
+        <div className="mt-2 d-flex align-items-center">
+          <Button
+            variant="light"
+            className="border d-flex align-items-center gap-2"
+            onClick={addRow}
+          >
+            <span className="fw-bold">+</span>
+            <span className="fw-semibold">Add Item</span>
+          </Button>
         </div>
-      )}
+      </div>
     </div>
   );
 }
