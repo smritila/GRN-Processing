@@ -1,90 +1,10 @@
 import { useState } from "react";
-import { DataGrid } from "react-data-grid";
+import DataTable from "react-data-table-component";
+
 import { ButtonGroup, Button, Badge } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 
 import ScanMode from "./ScanMode";
-
-/* ---------- Cell Editors / Formatters ---------- */
-function NumberEditor({ row, column, onRowChange }) {
-  return (
-    <input
-      type="number"
-      min="0"
-      className="form-control form-control-sm"
-      value={row[column.key] ?? 0}
-      onChange={(e) =>
-        onRowChange({ ...row, [column.key]: Number(e.target.value) || 0 })
-      }
-      autoFocus
-    />
-  );
-}
-function TextEditor({ row, column, onRowChange }) {
-  return (
-    <input
-      type="text"
-      className="form-control form-control-sm"
-      value={row[column.key] ?? ""}
-      onChange={(e) => onRowChange({ ...row, [column.key]: e.target.value })}
-      autoFocus
-    />
-  );
-}
-function DateEditor({ row, column, onRowChange }) {
-  return (
-    <input
-      type="date"
-      className="form-control form-control-sm"
-      value={row[column.key] ?? ""}
-      onChange={(e) => onRowChange({ ...row, [column.key]: e.target.value })}
-      autoFocus
-    />
-  );
-}
-function CurrencyEditor({ row, column, onRowChange }) {
-  const val = row[column.key] ?? 0;
-  return (
-    <div className="input-group input-group-sm">
-      <span className="input-group-text px-2">₹</span>
-      <input
-        type="number"
-        step="0.01"
-        min="0"
-        className="form-control"
-        value={val}
-        onChange={(e) =>
-          onRowChange({
-            ...row,
-            [column.key]: parseFloat(e.target.value || "0"),
-          })
-        }
-        autoFocus
-      />
-    </div>
-  );
-}
-function ConditionFormatter({ row }) {
-  const isGood = row.condition === "GOOD";
-  return (
-    <Button className="w-100" variant={isGood ? "success" : "danger"} size="sm">
-      {row.condition}
-    </Button>
-  );
-}
-function ConditionEditor({ row, onRowChange }) {
-  return (
-    <select
-      className="form-select form-select-sm"
-      value={row.condition || "GOOD"}
-      onChange={(e) => onRowChange({ ...row, condition: e.target.value })}
-      autoFocus
-    >
-      <option value="GOOD">GOOD</option>
-      <option value="BAD">BAD</option>
-    </select>
-  );
-}
 
 /* ---------- Main Component ---------- */
 function GrnRecords() {
@@ -137,6 +57,10 @@ function GrnRecords() {
     },
   ]);
 
+  // const updateRow = (id, key, value) => {
+  //   setRows((rs) => rs.map((r) => (r.id === id ? { ...r, [key]: value } : r)));
+  // };
+
   const deleteRow = (id) => {
     setRows((rs) => rs.filter((r) => r.id !== id));
   };
@@ -159,57 +83,56 @@ function GrnRecords() {
 
   const columns = [
     {
-      key: "item",
       name: "Item",
-      width: 220,
-      editable: true,
-      renderEditCell: (p) => <TextEditor {...p} />,
+      width: "220px",
+      cell: (row) => <span className="fw-semibold text-dark">{row.item}</span>,
     },
     {
-      key: "expectedQty",
       name: "Expected Qty",
-      editable: true,
-      renderEditCell: (p) => <NumberEditor {...p} />,
+      cell: (row) => <span className="text-secondary">{row.expectedQty}</span>,
     },
     {
-      key: "rejectedQty",
       name: "Rejected Qty",
-      editable: true,
-      renderEditCell: (p) => <NumberEditor {...p} />,
+      cell: (row) => <span className="text-secondary">{row.rejectedQty}</span>,
     },
     {
-      key: "batch",
       name: "Batch / LOT",
-      editable: true,
-      renderEditCell: (p) => <TextEditor {...p} />,
+      cell: (row) => <span className="fw-semibold">{row.batch}</span>,
     },
     {
-      key: "unitPrice",
       name: "Actual Unit Price",
-      editable: true,
-      renderEditCell: (p) => <CurrencyEditor {...p} />,
+      cell: (row) => (
+        <span className="text-success fw-bold">
+          ₹{row.unitPrice.toLocaleString()}
+        </span>
+      ),
     },
     {
-      key: "expiry",
       name: "Expiry",
-      width: 150,
-      editable: true,
-      renderEditCell: (p) => <DateEditor {...p} />,
+      width: "150px",
+      cell: (row) => <span className="text-muted">{row.expiry}</span>,
     },
     {
-      key: "condition",
       name: "Condition",
-      width: 140,
-      editable: true,
-      renderCell: (p) => <ConditionFormatter row={p.row} />,
-      renderEditCell: (p) => <ConditionEditor {...p} />,
+      width: "140px",
+      cell: (row) => {
+        const isGood = row.condition === "GOOD";
+        return (
+          <Button
+            className="w-100"
+            variant={isGood ? "success" : "danger"}
+            size="sm"
+          >
+            {row.condition}
+          </Button>
+        );
+      },
     },
     {
-      key: "actions",
       name: "Actions",
-      width: 90,
-      renderCell: ({ row }) => (
-        <div className="d-flex justify-content-center">
+      width: "90px",
+      cell: (row) => (
+        <div className="d-flex justify-content-center w-100">
           <Button
             variant="outline-danger"
             size="sm"
@@ -219,15 +142,31 @@ function GrnRecords() {
           </Button>
         </div>
       ),
+      ignoreRowClick: true,
+      allowOverflow: true,
+      button: true,
     },
   ];
+
+  const customStyles = {
+    rows: {
+      style: {
+        minHeight: "40px",
+      },
+    },
+    headCells: {
+      style: {
+        fontWeight: 600,
+      },
+    },
+  };
 
   return (
     <div
       style={{ background: "#f3f6ed", borderRadius: 8 }}
       className="py-4 px-3"
     >
-      {/* Toolbar before the grid */}
+      {/* Toolbar before the table */}
       <div className="d-flex align-items-center justify-content-between mb-3">
         <ButtonGroup className="gap-2">
           {buttonGroups.map(({ key, label }) => (
@@ -253,22 +192,21 @@ function GrnRecords() {
       </div>
 
       {/* Content */}
-
       {mode === "scan" ? (
         <ScanMode />
       ) : (
         <div className="bg-white p-3">
-          {/* Give the grid a real height via wrapper so it renders */}
-
-          <DataGrid
-            className="rdg-light"
+          <DataTable
             columns={columns}
-            rows={rows}
-            rowKeyGetter={(r) => r.id}
-            rowHeight={40}
-            onRowsChange={setRows}
-            defaultColumnOptions={{ resizable: true }}
-            style={{ height: "100%" }}
+            data={rows}
+            dense
+            highlightOnHover
+            fixedHeader
+            fixedHeaderScrollHeight="360px"
+            customStyles={{
+              rows: { style: { minHeight: "40px" } },
+              headCells: { style: { fontWeight: 600 } },
+            }}
           />
 
           {/* Footer bar directly under the last row */}
@@ -287,4 +225,5 @@ function GrnRecords() {
     </div>
   );
 }
+
 export default GrnRecords;
