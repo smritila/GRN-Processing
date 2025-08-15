@@ -1,4 +1,3 @@
-import { useState } from "react";
 import DataTable from "react-data-table-component";
 
 import { ButtonGroup, Button, Badge } from "react-bootstrap";
@@ -12,7 +11,7 @@ function GrnRecords() {
     { key: "manual", label: "MANUAL ENTRY" },
   ];
 
-  const [rows, setRows] = useState([
+  const rows = [
     {
       id: 1,
       item: "TMT Bar",
@@ -53,31 +52,7 @@ function GrnRecords() {
       expiry: "2035-10-09",
       condition: "GOOD",
     },
-  ]);
-
-  // const updateRow = (id, key, value) => {
-  //   setRows((rs) => rs.map((r) => (r.id === id ? { ...r, [key]: value } : r)));
-  // };
-
-  const deleteRow = (id) => {
-    setRows((rs) => rs.filter((r) => r.id !== id));
-  };
-
-  const addRow = () => {
-    setRows((rs) => [
-      ...rs,
-      {
-        id: Date.now(),
-        item: "",
-        expectedQty: 0,
-        rejectedQty: 0,
-        batch: "",
-        unitPrice: 0,
-        expiry: "",
-        condition: "GOOD",
-      },
-    ]);
-  };
+  ];
 
   const columns = [
     {
@@ -131,11 +106,7 @@ function GrnRecords() {
       width: "90px",
       cell: (row) => (
         <div className="d-flex justify-content-center w-100">
-          <Button
-            variant="outline-danger"
-            size="sm"
-            onClick={() => deleteRow(row.id)}
-          >
+          <Button variant="outline-danger" size="sm">
             <Trash size={16} />
           </Button>
         </div>
@@ -186,7 +157,7 @@ function GrnRecords() {
           fixedHeader
           fixedHeaderScrollHeight="360px"
           customStyles={{
-            rows: { style: { minHeight: "40px" } },
+            rows: { style: { minHeight: "100px" } },
             headCells: { style: { fontWeight: 600 } },
           }}
         />
@@ -196,7 +167,6 @@ function GrnRecords() {
           <Button
             variant="light"
             className="border d-flex align-items-center gap-2"
-            onClick={addRow}
           >
             <span className="fw-bold">+</span>
             <span className="fw-semibold">Add Item</span>
