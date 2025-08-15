@@ -148,19 +148,6 @@ function GrnRecords() {
     },
   ];
 
-  const customStyles = {
-    rows: {
-      style: {
-        minHeight: "40px",
-      },
-    },
-    headCells: {
-      style: {
-        fontWeight: 600,
-      },
-    },
-  };
-
   return (
     <div
       style={{ background: "#f3f6ed", borderRadius: 8 }}
