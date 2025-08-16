@@ -129,8 +129,6 @@ function GrnRecords() {
             <Button
               key={key}
               role="tab"
-              aria-selected={mode === key}
-              aria-controls={`panel-${key}`}
               className="fw-semibold px-3 border rounded"
               variant={mode === key ? "secondary" : "outline-light"}
               style={{
