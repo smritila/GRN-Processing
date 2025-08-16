@@ -1,6 +1,6 @@
 import DataTable from "react-data-table-component";
 
-import { ButtonGroup, Button, Badge } from "react-bootstrap";
+import { ButtonGroup, Button } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 
 /* ---------- Main Component ---------- */
@@ -75,7 +75,7 @@ function GrnRecords() {
     {
       name: "Actual Unit Price",
       cell: (row) => (
-        <span className="text-success fw-bold">
+        <span className="text-muted fw-bold">
           ₹{row.unitPrice.toLocaleString()}
         </span>
       ),
@@ -111,9 +111,9 @@ function GrnRecords() {
           </Button>
         </div>
       ),
-      ignoreRowClick: true,
-      allowOverflow: true,
-      button: true,
+      // ignoreRowClick: true,
+      // allowOverflow: true,
+      // button: true,
     },
   ];
 
@@ -143,7 +143,6 @@ function GrnRecords() {
             </Button>
           ))}
         </ButtonGroup>
-        <Badge bg="light" text="dark" className="border"></Badge>
       </div>
 
       {/* Content */}
